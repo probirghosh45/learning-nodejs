@@ -1,43 +1,55 @@
 import express, { Application, Request, Response } from "express";
 import fs from "fs";
 import path from "path";
+import { todosRouter } from "./todos/todos.router";
 
 const app: Application = express();
 app.use(express.json())
 
-const filePath = path.join(__dirname, "./todo.json");
+
+// const todosRouter = express.Router()
+// const userRouter = express.Router()
+
+app.use("/todos",todosRouter)
+// app.use("/users",userRouter)
+
+
+// todosRouter.get("/all-todos")
+
+
+// const filePath = path.join(__dirname, "./todo.json");
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Learning ExpressJs with Typescript!");
 });
 
-app.get("/todos", (req: Request, res: Response) => {
-  const data = fs.readFileSync(filePath, { encoding: "utf-8" });
-  //    res.send(data)
-  res.json(data);
-});
+// app.get("/todos", (req: Request, res: Response) => {
+//   const data = fs.readFileSync(filePath, { encoding: "utf-8" });
+//   //    res.send(data)
+//   res.json(data);
+// });
 
-app.get("/todos/:title", (req: Request , res : Response) => {
-    console.log("From Query",req.query)
-    console.log("From Params",req.params)
-    const data = fs.readFileSync(filePath,{encoding : "utf-8"})
-    res.json(data);
-} )
+// app.get("/todos/:title", (req: Request , res : Response) => {
+//     console.log("From Query",req.query)
+//     console.log("From Params",req.params)
+//     const data = fs.readFileSync(filePath,{encoding : "utf-8"})
+//     res.json(data);
+// } )
 
-app.get("/todos/:title/:body", (req: Request , res : Response) => {
-    console.log("From Query",req.query)
-    console.log("From Params",req.params)
-    const data = fs.readFileSync(filePath,{encoding : "utf-8"})
-    res.json(data);
-} )
+// app.get("/todos/:title/:body", (req: Request , res : Response) => {
+//     console.log("From Query",req.query)
+//     console.log("From Params",req.params)
+//     const data = fs.readFileSync(filePath,{encoding : "utf-8"})
+//     res.json(data);
+// } )
 
 
 
-app.post('/todos/create-job',(req:Request , res : Response ) => {
-    const { title, body } = req.body;
-    console.log(title, body);
-    res.send("Hello Express JS!")
-})
+// app.post('/todos/create-job',(req:Request , res : Response ) => {
+//     const { title, body } = req.body;
+//     console.log(title, body);
+//     res.send("Hello Express JS!")
+// })
 
 export default app;
 
